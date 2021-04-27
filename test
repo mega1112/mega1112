@@ -1389,13 +1389,8 @@ local function on_console_input(input)
 end
 
 local function handle_callbacks()
-	client_color_log(255, 255, 255, "|--------------------------------------------------------|")
-	client_color_log(0, 150, 255, 	"           Thanks for downloading Teamskeet V2!           ")
-	client_color_log(150, 0, 200,   "            Type //help for a list of commands            ")
-	client_color_log(225, 0, 225, 	"   Support the script: https://patreon.com/luascripting   ")
-	client_color_log(255, 150, 175, "   For the best skeet configs: https://shoppy.gg/@amgis   ")
-	client_color_log(175, 255, 0, 	" Join the discord for updates: https://discord.gg/eQj9fEe ")
-	client_color_log(255, 255, 255, "|--------------------------------------------------------|")
+	client_color_log(255, 255, 255, "|----------------------AA LOADED-----------------------|")
+
     ui_set_callback(player_state, handle_menu)
 	ui_set_callback(manual_enable, handle_menu)
 	ui_set_callback(ind_set, handle_menu)
