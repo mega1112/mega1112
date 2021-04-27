@@ -1390,7 +1390,6 @@ end
 
 local function handle_callbacks()
 	client_color_log(255, 255, 255, "|----------------------AA LOADED-----------------------|")
-
     ui_set_callback(player_state, handle_menu)
 	ui_set_callback(manual_enable, handle_menu)
 	ui_set_callback(ind_set, handle_menu)
