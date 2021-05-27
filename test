@@ -69,7 +69,7 @@ local ref = {
     yawbase = ui_reference("AA", "Anti-aimbot angles", "Yaw base"),
     fakeyawlimit = ui_reference("AA", "anti-aimbot angles", "Fake yaw limit"),
     fsbodyyaw = ui_reference("AA", "anti-aimbot angles", "Freestanding body yaw"),
-    lowerbodyyaw = ui_reference("AA", "Anti-aimbot angles", "Lower body yaw target"),
+    -- lowerbodyyaw = ui_reference("AA", "Anti-aimbot angles", "Lower body yaw target"),
     edgeyaw = ui_reference("AA", "Anti-aimbot angles", "Edge yaw"),
     maxprocticks = ui_reference("MISC", "Settings", "sv_maxusrcmdprocessticks"),
     fakeduck = ui_reference("RAGE", "Other", "Duck peek assist"),
@@ -111,7 +111,7 @@ for i=1, 6 do
 		gs_bodyyawadd = ui_new_slider("AA", "Anti-aimbot angles", "\nBody yaw add" .. player_states[i], -180, 180, 0),
 		bodyyaw = ui_new_combobox("AA", "Anti-aimbot angles", "Body yaw\n" .. player_states[i], { "Off", "Opposite", "Freestanding", "Reversed Freestanding", "Jitter", "Switch key"}),
 		bodyyaw_settings = ui_new_multiselect("AA", "Anti-aimbot angles", "Body yaw settings\n" .. player_states[i], { "Jitter when vulnerable", "Anti-resolver", "Detect missed angle"}),
-		lowerbodyyaw = ui_new_combobox("AA", "Anti-aimbot angles", "Lower body yaw\n" .. player_states[i], { "Off", "Sway", "Half sway", "Opposite", "Eye yaw"}),
+		-- lowerbodyyaw = ui_new_combobox("AA", "Anti-aimbot angles", "Lower body yaw\n" .. player_states[i], { "Off", "Sway", "Half sway", "Opposite", "Eye yaw"}),
 		fakeyawlimit = ui_new_slider("AA", "Anti-aimbot angles", "Fake yaw limit\n" .. player_states[i], 0, 60, 60),
 		fakeyawmode = ui_new_combobox("AA", "Anti-aimbot angles", "Customize fake yaw limit\n" .. player_states[i], { "Off", "Jitter", "Random", "Custom right" }),
 		fakeyawamt = ui_new_slider("AA", "Anti-aimbot angles", "\nFake yaw randomization" .. player_states[i], 0, 60, 0),
@@ -186,7 +186,7 @@ local function set_og_menu(state)
 	ui_set_visible(ref.edgeyaw, state)
 	ui_set_visible(ref_freestand, state)
 	ui_set_visible(ref_freestandkey, state)
-	ui_set_visible(ref.lowerbodyyaw, state)
+	-- ui_set_visible(ref.lowerbodyyaw, state)
 	ui_set_visible(ref_os, state)
 	ui_set_visible(ref_oskey, state)
 end
@@ -216,7 +216,7 @@ local function handle_menu()
 		ui_set_visible(anti_aim[i].bodyyaw, active_i == i and not gs_aa)
 		ui_set_visible(anti_aim[i].bodyyaw_settings, not gs_aa and active_i == i and ui_get(anti_aim[i].bodyyaw) ~= "Off")
 
-		ui_set_visible(anti_aim[i].lowerbodyyaw, active_i == i)
+		-- ui_set_visible(anti_aim[i].lowerbodyyaw, active_i == i)
 		ui_set_visible(anti_aim[i].fakeyawlimit, active_i == i)
 		ui_set_visible(anti_aim[i].fakeyawmode, active_i == i)
 		ui_set_visible(anti_aim[i].fakeyawamt, active_i == i and ui_get(anti_aim[i].fakeyawmode) ~= "Off")
@@ -717,7 +717,7 @@ local function on_setup_command(c)
 	local fakelimit = ui_get(anti_aim[p_state].fakeyawlimit)
 	local fakemode = ui_get(anti_aim[p_state].fakeyawmode)
 	local fakeamt = ui_get(anti_aim[p_state].fakeyawamt)
-	local lby = ui_get(anti_aim[p_state].lowerbodyyaw)
+	-- local lby = ui_get(anti_aim[p_state].lowerbodyyaw)
 
 	if fakemode == "Jitter" then
 		fakelimit = client_random_int(0, 1) == 1 and fakeamt or fakelimit
@@ -748,16 +748,16 @@ local function on_setup_command(c)
 	end
 
 	--lowerbody
-	if lby ~= "Half sway" then
-		ui_set(ref.lowerbodyyaw, (lby == "Opposite" and (exploiting or best_desync == 0)) and "Eye yaw" or lby)
-	else
-		if last_sway_time + 1.1 < globals_curtime() then
-			ui_set(ref.lowerbodyyaw, ui_get(ref.lowerbodyyaw) == "Eye yaw" and "Opposite" or "Eye yaw")
-			last_sway_time = globals_curtime()
-		elseif last_sway_time > globals_curtime() then
-			last_sway_time = globals_curtime()
-		end
-	end
+	-- if lby ~= "Half sway" then
+		-- ui_set(ref.lowerbodyyaw, (lby == "Opposite" and (exploiting or best_desync == 0)) and "Eye yaw" or lby)
+	-- else
+		-- if last_sway_time + 1.1 < globals_curtime() then
+			-- ui_set(ref.lowerbodyyaw, ui_get(ref.lowerbodyyaw) == "Eye yaw" and "Opposite" or "Eye yaw")
+			-- last_sway_time = globals_curtime()
+		-- elseif last_sway_time > globals_curtime() then
+			-- last_sway_time = globals_curtime()
+		-- end
+	-- end
 
 	choked_cmds = c.chokedcommands
 	handle_menu()
