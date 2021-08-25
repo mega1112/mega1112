@@ -1836,8 +1836,6 @@ end
 
 local function handle_callbacks()
 
-   client.color_log(180, 238,0, "Anti-aim Loaded!")
-
     ui_set_callback(anti_aim[7].aa_settings, handle_menu)
 	ui_set_callback(anti_aim[0].player_state, handle_menu)
 	ui_set_callback(ref.player_list, handle_menu)
