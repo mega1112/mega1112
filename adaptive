@@ -296,8 +296,6 @@ end
 local screen = {client.screen_size()}
 local center = {screen[1]/2, screen[2]/2}
 
-client.set_event_callback("paint", paint)
-
 local function handle_menu()
     local enabled = ui_get(master_switch)
     ui_set_visible(active_wpn, enabled)
