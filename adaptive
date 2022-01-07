@@ -277,7 +277,7 @@ local function run_visuals()
     local cx, cy = sx / 2, sy / 2
 
     if (ovr_selected ~= 0 and contains(ui_get(rage[active_idx].custom_damage), "On-key")) or (lethal_rev_active and ui_get(lethal_rev)) then
-        renderer_text(cx + 2, cy -14, 255, 255, 255, 255, "d", 0, tostring(ui_get(ref_mindamage)))
+        renderer_text(cx + 4, cy -20, 15, 220, 20, 255, "d", 0, tostring(ui_get(ref_mindamage)))
 	end
 
     if ui_get(unsafe_ovr_key) then
