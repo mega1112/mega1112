@@ -43,7 +43,7 @@ for i=1, #config_names do
         --accuracy_boost = ui_new_combobox("LUA", "A", "[" .. config_names[i] .. "] Accuracy boost", {"Off", "Low", "Medium", "High", "Maximum"}),
         target_hitbox = ui_new_multiselect("LUA", "A", "[" .. config_names[i] .. "] Target hitbox", { "Head", "Chest", "Arms", "Stomach", "Legs", "Feet" }),
         multipoint = ui_new_multiselect("LUA", "A", "[" .. config_names[i] .. "] Multi-point", { "Head", "Chest", "Arms", "Stomach", "Legs", "Feet" }),
-        multimode = ui_new_combobox("LUA", "A", "\n[" .. config_names[i] .. "] Multi-point mode", { "Low", "Medium", "High" }),
+        --multimode = ui_new_combobox("LUA", "A", "\n[" .. config_names[i] .. "] Multi-point mode", { "Low", "Medium", "High" }),
         multipoint_scale = ui_new_slider("LUA", "A", "[" .. config_names[i] .. "] Multi-point scale", 24, 100, 60, true, "%", 1, { [24] = "Auto" }),
 		unsafe = ui_new_multiselect("LUA", "A", "[" .. config_names[i] .. "] Avoid unsafe hitboxes", { "Head", "Chest", "Arms", "Stomach", "Legs", "Feet" }),
         dt_mp_enable = ui_new_checkbox("LUA", "A", "[" .. config_names[i] .. "] Custom DT multipoint"),
@@ -133,7 +133,7 @@ local ref_antiaim_correction = ui_reference("RAGE", "Other", "Anti-aim correctio
 local ref_antiaim_correction_override = ui_reference("RAGE", "Other", "Anti-aim correction override")
 local ref_prefer_bodyaim = ui_reference("RAGE", "Other", "Prefer body aim")
 local ref_prefer_bodyaim_disablers = ui_reference("RAGE", "Other", "Prefer body aim disablers")
-local ref_force_baim_peek = ui_reference("RAGE", "Other", "Force body aim on peek")
+--local ref_force_baim_peek = ui_reference("RAGE", "Other", "Force body aim on peek")
 local ref_force_bodyaim = ui_reference("RAGE", "Other", "Force body aim")
 local ref_duck_peek_assist = ui_reference("RAGE", "Other", "Duck peek assist")
 local ref_doubletap, ref_doubletapkey = ui_reference("RAGE", "Other", "Double tap")
@@ -293,6 +293,10 @@ local function run_visuals()
 	end
 end
 
+local screen = {client.screen_size()}
+local center = {screen[1]/2, screen[2]/2}
+
+
 local function handle_menu()
     local enabled = ui_get(master_switch)
     ui_set_visible(active_wpn, enabled)
@@ -314,7 +318,7 @@ local function handle_menu()
         ui_set_visible(rage[i].target_hitbox, show)
         ui_set_visible(rage[i].multipoint, show)
 		ui_set_visible(rage[i].unsafe, show)
-        ui_set_visible(rage[i].multimode, show and #{unpack(ui_get(rage[i].multipoint))} > 0)
+        --ui_set_visible(rage[i].multimode, show and #{unpack(ui_get(rage[i].multipoint))} > 0)
         ui_set_visible(rage[i].multipoint_scale, show and #{unpack(ui_get(rage[i].multipoint))} > 0)
         ui_set_visible(rage[i].dt_mp_enable, show)
         ui_set_visible(rage[i].dt_multipoint, show and ui_get(rage[i].dt_mp_enable))
@@ -445,7 +449,7 @@ local function set_config(idx)
     local mp_val = custom_mp and ui_get(rage[i].dt_multipoint) or ui_get(rage[i].multipoint)
 	local unsafe_val = ui_get(unsafe_ovr_key) and ui_get(unsafe_ovr) or ui_get(rage[i].unsafe)
     local mps_val = custom_mp and ui_get(rage[i].dt_multipoint_scale) or ui_get(rage[i].multipoint_scale)
-    local mpm_val = custom_mp and ui_get(rage[i].dt_multimode) or ui_get(rage[i].multimode)
+    local mpm_val = custom_mp
 
     local qs_val = {ui_get(rage[i].quick_stop), ui_get(rage[i].quick_stop_options)}
     local dt_qs_val = ui_get(rage[i].doubletap_stop)
@@ -483,7 +487,7 @@ local function set_config(idx)
     else
         ui_set(ref_target_hitbox, thb_val)
         ui_set(ref_multipoint, mp_val)
-        ui_set(ref_multipoint_mode, mpm_val)
+        --ui_set(ref_multipoint_mode, mpm_val)
         ui_set(ref_multipoint_scale, mps_val)
         ui_set(ref_unsafe, unsafe_val)
         ui_set(ref_prefer_safepoint, psp_val)
@@ -495,7 +499,7 @@ local function set_config(idx)
         ui_set(ref_prefer_bodyaim, ui_get(rage[i].prefer_baim))
         ui_set(ref_prefer_bodyaim_disablers, ui_get(rage[i].prefer_baim_disablers))
         ui_set(ref_delay_shot, ui_get(rage[i].delay_shot))
-        ui_set(ref_force_baim_peek, ui_get(rage[i].force_baim_peek))
+        --ui_set(ref_force_baim_peek, ui_get(rage[i].force_baim_peek))
     end
 
     if not ui_get(global_dt_hc) then
@@ -568,5 +572,3 @@ local function init_callbacks()
 end
 
 init_callbacks()
-
--- ez map by sativa
